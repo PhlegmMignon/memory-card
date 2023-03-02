@@ -1,6 +1,10 @@
 import React, { useState, setState } from "react";
 
 const ScoreTracker = (props) => {
+  const [currentScore, setCurrentScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
+  const [reset, setReset] = useState(false);
+
   let scores = (
     <div>
       <div>Current score: 0</div>

@@ -1,34 +1,39 @@
 import "./App.css";
 import React, { useState, setState } from "react";
 import ScoreTracker from "./components/ScoreTracker";
+import Card from "./components/CardFactory";
+import CardGrid from "./components/CardGrid";
 
 function App() {
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-  const [cardArray, setCardArray] = useState([]);
+  const [reset, setReset] = useState(false);
 
-  const shuffle = (array) => {
-    let currentIndex = array.length,
-      randomIndex;
-    while (currentIndex != 0) {
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
+  let scores = (
+    <div>
+      <div>Current score: 0</div>
+      <div>Best score: 0</div>
+    </div>
+  );
 
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ];
-    }
-
-    return array;
-  };
-
+  if (currentScore != 0 || bestScore != 0) {
+    scores = (
+      <div>
+        <p>
+          Current score: <span>{currentScore}</span>
+        </p>
+        <p>
+          Best score: <span>{bestScore}</span>
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="App">
       <div className="title">Memory game</div>
+
       <ScoreTracker />
+      <CardGrid />
     </div>
   );
 }
