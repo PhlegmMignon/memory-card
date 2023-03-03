@@ -9,12 +9,24 @@ html,
   text-align: center;
 }
 
-#cardGrid {
-  height: 100%;
+.title {
+  font-size: 2rem;
+  box-sizing: border-box;
+  padding: 20px 20px;
 }
+
+#cardGrid {
+  height: 30%;
+  display: grid;
+  padding: 50px 400px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+}
+
 .cards {
-  height: 50px;
-  width: 50px;
+  height: 100px;
+  width: 100px;
 }
 
 .App-logo {

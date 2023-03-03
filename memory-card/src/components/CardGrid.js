@@ -20,7 +20,7 @@ const CardGrid = (props) => {
     colorArray.map((value, index) => index)
   );
 
-  const shuffle = (array) => {
+  const shuffleAlgo = (array) => {
     let currentIndex = array.length,
       randomIndex;
     while (currentIndex != 0) {
@@ -38,6 +38,10 @@ const CardGrid = (props) => {
     return array;
   };
 
+  const shuffle = () => {
+    setPositions(shuffleAlgo(positions));
+  };
+
   //   console.log(positions);
 
   return (
@@ -48,6 +52,10 @@ const CardGrid = (props) => {
             key={colorArray[position].name + "card"}
             color={colorArray[position].color}
             name={colorArray[position].name}
+            addPoint={props.addPoint}
+            endGame={props.endGame}
+            reset={props.reset}
+            shuffle={shuffle}
           />
         );
       })}

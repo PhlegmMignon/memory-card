@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, setState } from "react";
+import React, { useState } from "react";
 import ScoreTracker from "./components/ScoreTracker";
 import Card from "./components/CardFactory";
 import CardGrid from "./components/CardGrid";
@@ -9,31 +9,32 @@ function App() {
   const [bestScore, setBestScore] = useState(0);
   const [reset, setReset] = useState(false);
 
-  let scores = (
-    <div>
-      <div>Current score: 0</div>
-      <div>Best score: 0</div>
-    </div>
-  );
+  const addPoint = () => {
+    setCurrentScore(currentScore + 1);
 
-  if (currentScore != 0 || bestScore != 0) {
-    scores = (
-      <div>
-        <p>
-          Current score: <span>{currentScore}</span>
-        </p>
-        <p>
-          Best score: <span>{bestScore}</span>
-        </p>
-      </div>
-    );
-  }
+    if (currentScore > bestScore) {
+      setBestScore(currentScore + 1);
+    }
+    setReset(false);
+  };
+
+  const endGame = () => {
+    if (currentScore > bestScore) {
+      setBestScore(currentScore);
+    }
+
+    setCurrentScore(0);
+    setReset(true);
+  };
+
+  //useeffect whenever position changes, rerender page [positions]
+
   return (
     <div className="App">
       <div className="title">Memory game</div>
 
-      <ScoreTracker />
-      <CardGrid />
+      <ScoreTracker currentScore={currentScore} bestScore={bestScore} />
+      <CardGrid reset={reset} addPoint={addPoint} endGame={endGame} />
     </div>
   );
 }
